@@ -9,7 +9,7 @@ public class ThemeParkTracker {
     }
 
     public void addRide(Ride ride) {
-        rides.set(rides.size(), ride);
+        rides.add(ride);
     }
 
     public Ride getRide(int index) {
@@ -22,15 +22,16 @@ public class ThemeParkTracker {
 
     public void removeClosedRides() {
         for (int i = 0; i < rides.size(); i++) {
-            if (rides.get(i).getStatus() == "closed") {
+            if (rides.get(i).getStatus().equals("closed")) {
                 rides.remove(i);
+                i--;
             }
         }
     }
 
     public void printRide(String name) {
         for (Ride ride : rides) {
-            if (ride.getName() == name) {
+            if (ride.getName().equals(name)) {
                 System.out.println(ride);
             }
         }
@@ -43,7 +44,7 @@ public class ThemeParkTracker {
     }
 
     public void printAllRides() {
-        for (int i = 0; i < rides.size() - 1; i++) {
+        for (int i = 0; i < rides.size(); i++) {
             System.out.println(rides.get(i));
         }
     }
@@ -52,31 +53,32 @@ public class ThemeParkTracker {
 
         for (int i = 0; i < rides.size(); i++) {
 
-            for (int j = i + 1; j < rides.size(); j++) {
+            for (int j = i + 1; j < rides.size() -1; j++) {
 
                 if (rides.get(i).getWaitTime() > rides.get(j).getWaitTime()) {
 
-                    int temp = rides.get(i).getWaitTime();
+                    Ride temp = rides.get(i);
 
-                    rides.get(i).setWaitTime(rides.get(j).getWaitTime());
+                    rides.set(i,rides.get(j));
 
-                    rides.get(j).setWaitTime(temp);
+                    rides.set(j, temp);
                 }
             }
         }
     }
 
     public String findRideStatus(String rideName) {
-
+        if (rides.isEmpty()){
+            return "No rides in tracker";
+        }
         for (Ride ride : rides) {
 
-            if (ride.getName() == rideName) {
+            if (ride.getName().equals(rideName)) {
                 return ride.getStatus();
-            } else {
-                return "Ride not found";
             }
         }
+        return "Ride not found";
 
-        return "No rides in tracker";
+
     }
 }
