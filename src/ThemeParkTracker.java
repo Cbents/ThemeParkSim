@@ -53,7 +53,7 @@ public class ThemeParkTracker {
 
         for (int i = 0; i < rides.size(); i++) {
 
-            for (int j = i + 1; j < rides.size() -1; j++) {
+            for (int j = i + 1; j < rides.size(); j++) {
 
                 if (rides.get(i).getWaitTime() > rides.get(j).getWaitTime()) {
 
